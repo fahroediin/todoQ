@@ -1,9 +1,8 @@
 # Kanban Board Kolaboratif Real-time
 
-Selamat datang di Kanban Board Kolaboratif! Ini adalah aplikasi web to-do list interaktif yang memungkinkan tim berkolaborasi dalam mengelola tugas secara real-time. Aplikasi ini dibangun dengan tumpukan teknologi modern dan berfokus pada pengalaman pengguna yang lancar tanpa perlu registrasi.
+Selamat datang di Kanban Board Kolaboratif bernama todoQ (tuduku) Ini adalah aplikasi web to-do list interaktif yang memungkinkan tim berkolaborasi dalam mengelola tugas secara real-time. Aplikasi ini dibangun dengan tumpukan teknologi modern dan berfokus pada pengalaman pengguna yang lancar tanpa perlu registrasi.
 
  
-*(Catatan: Anda bisa mengganti URL gambar ini dengan screenshot nyata dari aplikasi Anda setelah menjalankannya)*
 
 ## ✨ Fitur Utama
 
