@@ -1,103 +1,123 @@
-body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; background-color:#0079BF; color:#333; margin:0; padding:1rem; overflow-x:auto; }
-.main-container { max-width:1400px; margin:0 auto; }
+/* Import Font dari Google Fonts (Opsional, tapi sangat direkomendasikan) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Variabel Warna untuk konsistensi */
+:root {
+    --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --bg-board: #f4f5f7;
+    --text-primary: #172B4D;
+    --text-secondary: #5E6C84;
+    --text-light: #FFFFFF;
+    --primary-accent: #4c6ef5;
+    --primary-accent-hover: #4263eb;
+    --card-bg: #FFFFFF;
+    --green-accent: #38c976;
+    --green-accent-hover: #32b56a;
+    --red-accent: #fa5252;
+    --grey-accent: #868e96;
+    --grey-accent-hover: #5c6773;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+body { 
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+    background: var(--bg-gradient);
+    color: var(--text-primary); 
+    margin:0; 
+    padding:1.5rem; 
+    overflow-x:auto; 
+}
+.main-container { max-width:1600px; margin:0 auto; }
 .hidden { display:none !important; }
 
 /* Header */
-header { color:white; margin-bottom:1rem; display:flex; justify-content:space-between; align-items:center; }
-.header-right { display:flex; align-items:center; gap:1rem; }
-#username-display { background-color:rgba(255,255,255,0.3); padding:4px 10px; border-radius:4px; }
-#add-task-btn { background-color:rgba(255,255,255,0.3); color:white; border:none; padding:0.6rem 1rem; border-radius:4px; font-weight:bold; cursor:pointer; transition:background-color 0.2s; }
-#add-task-btn:hover { background-color:rgba(255,255,255,0.5); }
+header { color: var(--text-light); margin-bottom: 2rem; display:flex; justify-content:space-between; align-items:center; }
+header h1 { font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+.header-right { display:flex; align-items:center; gap:1.5rem; }
+#username-display { background-color:rgba(255,255,255,0.2); padding:6px 12px; border-radius:18px; font-weight: 500; font-size: 0.9rem;}
+#add-task-btn { background-color: var(--text-light); color: var(--primary-accent); border:none; padding:0.7rem 1.2rem; border-radius:8px; font-weight:600; cursor:pointer; transition: all 0.2s ease; box-shadow: var(--shadow-sm); }
+#add-task-btn:hover { background-color: #f1f3f5; transform: translateY(-1px); box-shadow: var(--shadow-md); }
 
 /* Modal & Overlay */
-.modal-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center; z-index:1000; }
-.modal-content { background:#f4f5f7; padding:2rem; border-radius:8px; width:90%; max-width:450px; box-shadow:0 5px 15px rgba(0,0,0,0.3); }
-.modal-content h2 { margin-top:0; }
+.modal-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(9,30,66,0.54); display:flex; justify-content:center; align-items:center; z-index:1000; backdrop-filter: blur(4px); }
+.modal-content { background: #fdfdff; padding:2rem; border-radius:12px; width:90%; max-width:480px; box-shadow: var(--shadow-lg); animation: fadeIn 0.3s ease-out; }
+@keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+.modal-content h2 { margin-top:0; font-weight: 600; color: var(--text-primary); }
+.modal-content p { color: var(--text-secondary); margin-bottom: 1.5rem; }
 .modal-content form { display:flex; flex-direction:column; gap:1rem; }
-.modal-content input, .modal-content textarea { width:100%; padding:0.75rem; border:1px solid #ccc; border-radius:4px; font-size:1rem; box-sizing:border-box; }
-.modal-content button { padding:0.75rem 1.5rem; border:none; border-radius:4px; font-size:1rem; cursor:pointer; font-weight:bold; }
-.modal-content form button[type="submit"] { background-color:#007bff; color:white; }
-.form-buttons { display:flex; justify-content:flex-end; gap:0.5rem; margin-top:1rem; }
-#cancel-task-btn { background-color:#6c757d; color:white; }
+.modal-content label { font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); }
+.modal-content input, .modal-content textarea { width:100%; padding:0.8rem 1rem; border:1px solid #dfe1e6; border-radius:8px; font-size:1rem; box-sizing:border-box; transition: border-color 0.2s, box-shadow 0.2s; }
+.modal-content input:focus, .modal-content textarea:focus { border-color: var(--primary-accent); box-shadow: 0 0 0 3px rgba(76, 110, 245, 0.2); outline: none; }
+.modal-content button { padding:0.8rem 1.5rem; border:none; border-radius:8px; font-size:1rem; cursor:pointer; font-weight:600; transition: all 0.2s ease; }
+.modal-content form button[type="submit"] { background-color:var(--primary-accent); color:white; }
+.modal-content form button[type="submit"]:hover { background-color: var(--primary-accent-hover); transform: translateY(-1px); }
+.form-buttons { display:flex; justify-content:flex-end; gap:0.75rem; margin-top:1.5rem; }
+#cancel-task-btn { background-color:#e9ecef; color: var(--text-secondary); }
+#cancel-task-btn:hover { background-color: #dee2e6; }
 
 /* Board Wrapper & Kanban Board */
 .board-wrapper { display: flex; }
-#kanban-board { flex-grow: 1; display: flex; gap: 1rem; }
-.kanban-column { background-color:#EBECF0; border-radius:8px; padding:0.75rem; min-width:300px; width:300px; flex-shrink:0; }
-.kanban-column h2 { font-size:1rem; font-weight:600; margin-top:0; padding:0 0.25rem 0.5rem; }
-.card-list { min-height:100px; display:flex; flex-direction:column; gap:0.75rem; }
+#kanban-board { flex-grow: 1; display: flex; gap: 1.5rem; }
+.kanban-column { background-color: var(--bg-board); border-radius:12px; padding:1rem; min-width:320px; width:320px; flex-shrink:0; box-shadow: var(--shadow-sm); }
+.kanban-column h2 { font-size:1rem; font-weight:600; margin: 0.25rem 0.5rem 1.25rem; color: var(--text-primary); }
+.card-list { min-height:100px; display:flex; flex-direction:column; gap:1rem; }
 
 /* Kanban Card */
-.kanban-card { background-color:#fff; padding:1rem; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.15); cursor:grab; position:relative; display:flex; flex-direction:column; gap:0.75rem; }
+.kanban-card { background-color: var(--card-bg); padding:1rem; border-radius:8px; box-shadow: var(--shadow-md); cursor:grab; position:relative; display:flex; flex-direction:column; gap:0.75rem; border-left: 4px solid transparent; transition: all 0.2s ease; }
+.kanban-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.kanban-card.dragging { opacity:0.8; transform:rotate(3deg); box-shadow: var(--shadow-lg); }
+.kanban-column.drag-over .card-list { background-color:#e9ecef; border-radius: 8px; }
 .kanban-card:active { cursor:grabbing; }
-.card-header { font-weight:600; word-wrap:break-word; }
-.card-detail { font-size:0.9rem; color:#555; white-space:pre-wrap; word-wrap:break-word; margin:0; }
+.card-header { font-weight:600; color: var(--text-primary); }
+.card-detail { font-size:0.9rem; color:var(--text-secondary); white-space:pre-wrap; word-wrap:break-word; margin:0; }
 .card-assignment { font-size:0.8rem; text-align:center; display: flex; flex-direction: column; gap: 0.5rem; }
-.take-task-btn { background-color:#28a745; color:white; border:none; padding:0.5rem; border-radius:4px; cursor:pointer; width:100%; transition: background-color 0.2s; font-weight: bold; }
-.take-task-btn:hover { background-color:#218838; }
-.unassign-task-btn { background-color: #6c757d; color: white; border: none; padding: 0.4rem; border-radius: 4px; cursor: pointer; width: 100%; transition: background-color 0.2s; font-weight: bold; font-size: 0.8rem; }
-.unassign-task-btn:hover { background-color: #5a6268; }
-.assigned-to { background-color:#e9ecef; color:#495057; padding:0.5rem; border-radius:4px; }
-.assigned-to-self { font-weight: bold; color: #172B4D; }
-.card-author { font-size:0.75rem; color:#888; text-align:right; }
-.delete-btn { position:absolute; top:5px; right:5px; background:none; border:none; color:#999; font-size:1.2rem; cursor:pointer; opacity:0; transition:opacity 0.2s; }
+.take-task-btn { background-color:var(--green-accent); color:white; border:none; padding:0.6rem; border-radius:6px; cursor:pointer; width:100%; transition: all 0.2s; font-weight: 600; }
+.take-task-btn:hover { background-color:var(--green-accent-hover); transform: scale(1.03); }
+.unassign-task-btn { background-color: var(--grey-accent); color: white; border: none; padding: 0.5rem; border-radius: 6px; cursor: pointer; width: 100%; transition: all 0.2s; font-weight: 600; font-size: 0.8rem; }
+.unassign-task-btn:hover { background-color: var(--grey-accent-hover); transform: scale(1.03); }
+.assigned-to { background-color:#f1f3f5; color:var(--text-secondary); padding:0.6rem; border-radius:6px; }
+.assigned-to-self { font-weight: 600; color: var(--text-primary); }
+.card-author { font-size:0.75rem; color:var(--grey-accent); text-align:right; margin-top: 0.5rem; }
+.delete-btn { position:absolute; top:8px; right:8px; background:none; border:none; color:#ced4da; font-size:1.2rem; cursor:pointer; opacity:0; transition:all 0.2s; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; }
 .kanban-card:hover .delete-btn { opacity:1; }
-.kanban-card.dragging { opacity:0.5; transform:rotate(3deg); }
-.kanban-column.drag-over .card-list { background-color:#DCDDE0; border-radius:4px; }
+.delete-btn:hover { background-color: #f1f3f5; color: var(--red-accent); }
 
 /* WIDGET PENGGUNA ONLINE */
 #online-users-widget { position: relative; }
 .avatar-container { display: flex; cursor: pointer; padding: 2px; }
-.avatar-circle, .avatar-more { width: 32px; height: 32px; border-radius: 50%; background-color: #DFE1E6; color: #172B4D; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8rem; border: 2px solid #0079BF; box-sizing: border-box; text-transform: uppercase; }
-.avatar-circle:not(:first-child), .avatar-more:not(:first-child) { margin-left: -10px; }
-.avatar-more { background-color: #6c757d; color: white; }
-.user-list-popover { position: absolute; top: calc(100% + 5px); right: 0; width: 220px; background-color: #fff; color: #172B4D; border-radius: 4px; box-shadow: 0 8px 16px -4px rgba(9,30,66,.25), 0 0 0 1px rgba(9,30,66,.08); z-index: 1020; padding: 0.5rem 0; }
-.user-list-popover-header { padding: 0.5rem 1rem; border-bottom: 1px solid #dfe1e6; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; }
+.avatar-circle, .avatar-more { width: 36px; height: 36px; border-radius: 50%; background-color: #c9d0fb; color: var(--primary-accent); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.9rem; border: 2px solid rgba(255,255,255,0.7); box-sizing: border-box; text-transform: uppercase; transition: transform 0.2s; }
+.avatar-circle:hover, .avatar-more:hover { transform: scale(1.1); }
+.avatar-circle:not(:first-child), .avatar-more:not(:first-child) { margin-left: -12px; }
+.avatar-more { background-color: var(--grey-accent); color: white; }
+.user-list-popover { position: absolute; top: calc(100% + 10px); right: 0; width: 240px; background-color: #fff; color: var(--text-primary); border-radius: 8px; box-shadow: var(--shadow-lg); z-index: 1020; padding: 0.5rem 0; animation: fadeIn 0.2s ease-out; }
+.user-list-popover-header { padding: 0.75rem 1rem; border-bottom: 1px solid #f1f3f5; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; }
 .user-list-popover ul { list-style: none; padding: 0; margin: 0; }
-.user-list-popover li { padding: 0.5rem 1rem; display: flex; align-items: center; gap: 0.75rem; font-size: 0.9rem; }
-.user-list-popover li::before { content: ''; display: block; width: 8px; height: 8px; background-color: #28a745; border-radius: 50%; }
+.user-list-popover li { padding: 0.6rem 1rem; display: flex; align-items: center; gap: 0.75rem; font-size: 0.9rem; transition: background-color 0.2s; }
+.user-list-popover li:hover { background-color: #f8f9fa; }
+.user-list-popover li::before { content: ''; display: block; width: 8px; height: 8px; background-color: var(--green-accent); border-radius: 50%; }
 
 /* STYLE CHAT */
 #chat-widget { position: fixed; bottom: 20px; right: 20px; z-index: 1010; }
-#chat-toggle { position: relative; /* Diperlukan untuk positioning badge */ width: 60px; height: 60px; background-color: #007bff; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: transform 0.2s ease-in-out; }
-#chat-toggle:hover { transform: scale(1.1); }
-
-/* --- STYLE BARU UNTUK NOTIFIKASI CHAT --- */
-#chat-notification-badge {
-    position: absolute;
-    top: -2px;
-    right: -2px;
-    background-color: #dc3545; /* Merah */
-    color: white;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.75rem;
-    font-weight: bold;
-    border: 2px solid white;
-    transform: scale(0);
-    transition: transform 0.2s ease;
-}
-#chat-notification-badge.visible {
-    transform: scale(1);
-}
-/* ------------------------------------------- */
-
-#chat-window { position: absolute; bottom: 80px; right: 0; width: 350px; height: 450px; background-color: white; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); display: flex; flex-direction: column; overflow: hidden; transform-origin: bottom right; transition: transform 0.2s ease-out, opacity 0.2s ease-out; }
-#chat-window.hidden { transform: scale(0); opacity: 0; }
-.chat-header { background-color: #f7f7f7; padding: 1rem; border-bottom: 1px solid #e0e0e0; }
-.chat-header h3 { margin: 0; font-size: 1rem; color: #333; }
-#chat-messages { flex-grow: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem; }
-.chat-message { max-width: 80%; padding: 0.5rem 0.8rem; border-radius: 18px; word-wrap: break-word; }
-.chat-message .sender { font-size: 0.7rem; font-weight: bold; margin-bottom: 2px; display: block; }
+#chat-toggle { position: relative; width: 60px; height: 60px; background: var(--primary-accent); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: var(--shadow-md); transition: all 0.2s ease-in-out; }
+#chat-toggle:hover { transform: translateY(-2px) scale(1.05); box-shadow: var(--shadow-lg); background: var(--primary-accent-hover); }
+#chat-notification-badge { position: absolute; top: 0px; right: 0px; background-color: var(--red-accent); color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 0.75rem; font-weight: bold; border: 2px solid white; transform: scale(0); transition: transform 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28); }
+#chat-notification-badge.visible { transform: scale(1); }
+#chat-window { position: absolute; bottom: 80px; right: 0; width: 350px; height: 450px; background-color: white; border-radius: 12px; box-shadow: var(--shadow-lg); display: flex; flex-direction: column; overflow: hidden; transform-origin: bottom right; animation: fadeIn 0.3s ease-out; }
+#chat-window.hidden { display: none; }
+.chat-header { background-color: #f8f9fa; padding: 1rem; border-bottom: 1px solid #e9ecef; }
+.chat-header h3 { margin: 0; font-size: 1rem; color: var(--text-primary); font-weight: 600; }
+#chat-messages { flex-grow: 1; padding: 1rem; overflow-y: auto; background-color: #f1f3f5; display: flex; flex-direction: column; gap: 0.75rem; }
+.chat-message { max-width: 80%; padding: 0.6rem 1rem; border-radius: 18px; word-wrap: break-word; }
+.chat-message .sender { font-size: 0.75rem; font-weight: 600; margin-bottom: 3px; display: block; }
 .chat-message .text { font-size: 0.9rem; line-height: 1.4; }
-.chat-message.other { background-color: #e9ecef; color: #212529; align-self: flex-start; border-bottom-left-radius: 4px; }
+.chat-message.other { background-color: #dee2e6; color: #343a40; align-self: flex-start; border-bottom-left-radius: 4px; }
 .chat-message.other .sender { color: #495057; }
-.chat-message.self { background-color: #007bff; color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
-.chat-message.self .sender { color: #e0e0ff; }
-#chat-form { display: flex; border-top: 1px solid #e0e0e0; padding: 0.5rem; }
-#chat-input { flex-grow: 1; border: none; padding: 0.5rem; font-size: 0.9rem; outline: none; }
-#chat-form button { background: none; border: none; cursor: pointer; padding: 0.5rem; color: #007bff; }
+.chat-message.self { background-color: var(--primary-accent); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+.chat-message.self .sender { color: #d0d9ff; }
+#chat-form { display: flex; border-top: 1px solid #e9ecef; padding: 0.75rem; background-color: #f8f9fa; }
+#chat-input { flex-grow: 1; border: 1px solid #ced4da; padding: 0.75rem; font-size: 0.9rem; outline: none; border-radius: 18px; transition: border-color 0.2s; }
+#chat-input:focus { border-color: var(--primary-accent); }
+#chat-form button { background: var(--primary-accent); border: none; cursor: pointer; padding: 0.5rem; color: white; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; margin-left: 0.5rem; transition: background-color 0.2s; }
+#chat-form button:hover { background-color: var(--primary-accent-hover); }
